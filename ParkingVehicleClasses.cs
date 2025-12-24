@@ -31,6 +31,7 @@ namespace ParkingLotApp.ParkingVehicleClasses
                 bool IsSpaceUpdated = CarParkingSpace.UpdateParkingSpace(true);
                 if (IsSpaceUpdated)
                 {
+                    isAlreadyParked = true;
                     Console.WriteLine("Car Parked Successfully...");
                     return;
                 }
@@ -53,6 +54,7 @@ namespace ParkingLotApp.ParkingVehicleClasses
             bool IsSpaceUpdated = CarParkingSpace.UpdateParkingSpace(false);
             if (IsSpaceUpdated)
             {
+                isAlreadyParked = false;
                 Console.WriteLine("Car Pulled Out Successfully");
                 return;
             }
@@ -83,6 +85,7 @@ namespace ParkingLotApp.ParkingVehicleClasses
                 bool IsSpaceUpdated = BikeParkingSpace.UpdateParkingSpace(true);
                 if (IsSpaceUpdated)
                 {
+                    isAlreayParked = true;
                     Console.WriteLine("Car Parked Successfully...");
                     return;
                 }
@@ -105,6 +108,7 @@ namespace ParkingLotApp.ParkingVehicleClasses
             bool IsSpaceUpdated = BikeParkingSpace.UpdateParkingSpace(false);
             if (IsSpaceUpdated)
             {
+                isAlreayParked = false;
                 Console.WriteLine("Car Pulled Out Successfully");
                 return;
             }
