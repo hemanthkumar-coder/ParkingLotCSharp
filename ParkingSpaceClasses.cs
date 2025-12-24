@@ -9,31 +9,65 @@ namespace ParkingLotApp.ParkingSpaceClasses
 {
     public class CarParkingSpace : IParkingSpace
     {
-        private static List<int> CarSpaceList = new List<int>() { 0,1,1,1,1};
+        private static Dictionary<int, string> CarSpaceMap = new Dictionary<int, string>();
+        static CarParkingSpace()
+        {
+            for(int i = 0; i < 10; i++)
+            {
+                CarSpaceMap.Add(i, "Availiable");
+            }
+        }
         public CarParkingSpace()
         {
             
         }
         public bool isSpaceAvailiable()
         {
-            foreach (var item in CarSpaceList)
+            foreach(KeyValuePair<int,string> K in CarSpaceMap)
             {
-                if (item == 0) return true;
+                if (K.Value.Equals("Availiable"))
+                {
+                    return true;
+                }
             }
             return false;
         }
 
-        public bool UpdateParkingSpace(bool isParking)
+        public bool UpdateParkingSpace(bool isParking,string carName)
         {
-            for(int i = 0; i < CarSpaceList.Count; i++)
+            if (isParking)
             {
-                if (CarSpaceList[i]==0&&isParking)
+                foreach (KeyValuePair<int, string> K in CarSpaceMap)
                 {
-                    CarSpaceList[i] = 1;
-                    return true;
-                }else if (CarSpaceList[i] == 1 && !isParking)
+                    if (K.Value.Equals("Availiable"))
+                    {
+                        CarSpaceMap[K.Key] = carName;
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                
+                foreach (var item in CarSpaceMap)
                 {
-                    CarSpaceList[i] = 0;
+                    if (item.Value.Equals(carName))
+                    {
+                        CarSpaceMap[item.Key] = "Availiable";
+                        return true;
+                    }
+                }
+                
+            }
+                return false;
+           
+        }
+        public bool IsAlreadyParked(string carName)
+        {
+            foreach (var item in CarSpaceMap)
+            {
+                if (item.Value.Equals(carName))
+                {
                     return true;
                 }
             }
@@ -43,10 +77,15 @@ namespace ParkingLotApp.ParkingSpaceClasses
 
     public class BikeParkingSpace : IParkingSpace
     {
-       private static List<int> BikeParkingSpaceList = new List<int>()
+        private static Dictionary<int, string> BikeSpaceMap = new Dictionary<int, string>();
+        static BikeParkingSpace()
+        {
+            for (int i = 0; i < 10; i++)
             {
-                1,0,1,1,0,1
-            };
+                BikeSpaceMap.Add(i, "Availiable");
+            }
+        }
+
         public BikeParkingSpace()
         {
             
@@ -54,25 +93,49 @@ namespace ParkingLotApp.ParkingSpaceClasses
 
         public bool isSpaceAvailiable()
         {
-            foreach (var item in BikeParkingSpaceList)
+            foreach (KeyValuePair<int, string> K in BikeSpaceMap)
             {
-                if (item == 0) return true;   
+                if (K.Value.Equals("Availiable"))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool IsAlreadyParked(string bikeName)
+        {
+            foreach (var item in BikeSpaceMap)
+            {
+                if (item.Value.Equals(bikeName))
+                {
+                    return true;
+                }
             }
             return false;
         }
 
-        public bool UpdateParkingSpace(bool isParking)
+        public bool UpdateParkingSpace(bool isParking,string bikeName)
         {
-            for (int i = 0; i < BikeParkingSpaceList.Count; i++)
+            if (isParking)
             {
-                if (BikeParkingSpaceList[i] == 0 && isParking)
+                foreach (KeyValuePair<int, string> K in BikeSpaceMap)
                 {
-                    BikeParkingSpaceList[i] = 1;
-                    return true;
-                }else if(BikeParkingSpaceList[i] == 1 && !isParking)
+                    if (K.Value.Equals("Availiable"))
+                    {
+                        BikeSpaceMap[K.Key] = bikeName;
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var item in BikeSpaceMap)
                 {
-                    BikeParkingSpaceList[i] = 0;
-                    return true;
+                    if (item.Value.Equals(bikeName))
+                    {
+                        BikeSpaceMap[item.Key] = "Availiable";
+                        return true;
+                    }
                 }
             }
             return false;

@@ -12,3 +12,4 @@ C:\Users\heman\source\repos\ParkingLotApp\ParkingLotApp\obj\Debug\net8.0\refint\
 C:\Users\heman\source\repos\ParkingLotApp\ParkingLotApp\obj\Debug\net8.0\ParkingLotApp.pdb
 C:\Users\heman\source\repos\ParkingLotApp\ParkingLotApp\obj\Debug\net8.0\ParkingLotApp.genruntimeconfig.cache
 C:\Users\heman\source\repos\ParkingLotApp\ParkingLotApp\obj\Debug\net8.0\ref\ParkingLotApp.dll
+C:\Users\heman\source\repos\ParkingLotApp\ParkingLotApp\obj\Debug\net8.0\ParkingLotApp.sourcelink.json

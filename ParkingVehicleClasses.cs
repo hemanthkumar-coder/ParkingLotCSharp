@@ -11,15 +11,22 @@ namespace ParkingLotApp.ParkingVehicleClasses
     class Car : IVehicle
     {
         IParkingSpace CarParkingSpace;
-        private bool isAlreadyParked;
-        public Car()
+        private string _CarName;
+        public string CarName
         {
+            get
+            {
+                return _CarName;
+            }
+        }
+        public Car(string carName)
+        {
+            _CarName = carName;
             this.CarParkingSpace = new CarParkingSpace();
-            isAlreadyParked = false;
         }
         public void ParkVehicle()
         {
-            if (isAlreadyParked)
+            if (CarParkingSpace.IsAlreadyParked(CarName))
             {
                 Console.WriteLine("Vehicle Already Parked");
                 return;
@@ -28,10 +35,9 @@ namespace ParkingLotApp.ParkingVehicleClasses
             bool IsSpaceAvailiable = CarParkingSpace.isSpaceAvailiable();
             if (IsSpaceAvailiable)
             {
-                bool IsSpaceUpdated = CarParkingSpace.UpdateParkingSpace(true);
+                bool IsSpaceUpdated = CarParkingSpace.UpdateParkingSpace(true,CarName);
                 if (IsSpaceUpdated)
                 {
-                    isAlreadyParked = true;
                     Console.WriteLine("Car Parked Successfully...");
                     return;
                 }
@@ -45,16 +51,15 @@ namespace ParkingLotApp.ParkingVehicleClasses
 
         public void PullingOutVehicle()
         {
-            if (!isAlreadyParked)
+            if (!CarParkingSpace.IsAlreadyParked(CarName))
             {
-                Console.WriteLine("Your vehicle Not Parked Anywhere");
+                Console.WriteLine("Bike Not Parked Anywhere");
                 return;
             }
 
-            bool IsSpaceUpdated = CarParkingSpace.UpdateParkingSpace(false);
+            bool IsSpaceUpdated = CarParkingSpace.UpdateParkingSpace(false,CarName);
             if (IsSpaceUpdated)
             {
-                isAlreadyParked = false;
                 Console.WriteLine("Car Pulled Out Successfully");
                 return;
             }
@@ -65,15 +70,22 @@ namespace ParkingLotApp.ParkingVehicleClasses
     class Bike : IVehicle
     {
         IParkingSpace BikeParkingSpace;
-        private bool isAlreayParked;
-        public Bike()
+        private string _BikeName;
+        public string BikeName
         {
+            get
+            {
+                return _BikeName;
+            }
+        }
+        public Bike(string bikeName)
+        {
+            _BikeName = bikeName;
             BikeParkingSpace = new BikeParkingSpace();
-            isAlreayParked = false;
         }
         public void ParkVehicle()
         {
-            if (isAlreayParked)
+            if (BikeParkingSpace.IsAlreadyParked(BikeName))
             {
                 Console.WriteLine("Bike Already Parked");
                 return;
@@ -82,11 +94,10 @@ namespace ParkingLotApp.ParkingVehicleClasses
             bool IsSpaceAvailiable = BikeParkingSpace.isSpaceAvailiable();
             if (IsSpaceAvailiable)
             {
-                bool IsSpaceUpdated = BikeParkingSpace.UpdateParkingSpace(true);
+                bool IsSpaceUpdated = BikeParkingSpace.UpdateParkingSpace(true,BikeName);
                 if (IsSpaceUpdated)
                 {
-                    isAlreayParked = true;
-                    Console.WriteLine("Car Parked Successfully...");
+                    Console.WriteLine("Bike Parked Successfully...");
                     return;
                 }
                 Console.WriteLine("Error Occured");
@@ -99,17 +110,16 @@ namespace ParkingLotApp.ParkingVehicleClasses
 
         public void PullingOutVehicle()
         {
-            if (!isAlreayParked)
+            if (!BikeParkingSpace.IsAlreadyParked(BikeName))
             {
-                Console.WriteLine("Vehicle is Not Parked Anywhere");
+                Console.WriteLine("Bike is Not Parked Anywhere");
                 return;
             }
 
-            bool IsSpaceUpdated = BikeParkingSpace.UpdateParkingSpace(false);
+            bool IsSpaceUpdated = BikeParkingSpace.UpdateParkingSpace(false,BikeName);
             if (IsSpaceUpdated)
             {
-                isAlreayParked = false;
-                Console.WriteLine("Car Pulled Out Successfully");
+                Console.WriteLine("Bike Pulled Out Successfully");
                 return;
             }
             Console.WriteLine("Error Occured");
